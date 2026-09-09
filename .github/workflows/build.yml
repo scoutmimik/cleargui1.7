@@ -19,8 +19,9 @@ jobs:
       - name: Download Forge 1.7.10 JAR
         run: |
           mkdir -p libs
-          curl -L "https://maven.cleanroommc.com/com/cleanroommc/forge/1.7.10-1614-MCP/forge-1.7.10-1614-MCP.jar" -o libs/forge-dev.jar
-      
+          wget -O libs/forge-dev.jar "https://github.com/CleanroomMC/Cleanroom/releases/download/0.2.0/forge-1.7.10-1614-1710-universal.jar" || \
+          curl -L -o libs/forge-dev.jar "https://github.com/CleanroomMC/Cleanroom/releases/download/0.2.0/forge-1.7.10-1614-1710-universal.jar"
+
       - name: Build with Maven
         run: mvn clean package
 
