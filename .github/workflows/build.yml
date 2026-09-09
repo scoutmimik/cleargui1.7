@@ -19,7 +19,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: '7.6.3'
+          gradle-version: '4.10.3'
 
       - name: Build with Gradle
         run: gradle build --no-daemon
@@ -27,6 +27,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ClearPause-1.7.10-JAR
+          name: ClearPause-JAR
           path: 'build/libs/*.jar'
           if-no-files-found: error
