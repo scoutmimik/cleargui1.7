@@ -4,11 +4,11 @@ buildscript {
         mavenCentral()
         maven {
             name = "GTNH Maven"
-            url = "https://nexus.gtnewhorizons.com/repository/public/"
+            url = "https://nexus.gtnewhorizons.com/repository/releases/"
         }
     }
     dependencies {
-        classpath "com.gtnewhorizons:retrofuturagradle:1.3.27"
+        classpath "com.gtnewhorizons:retrofuturagradle:1.3.38"
     }
 }
 
