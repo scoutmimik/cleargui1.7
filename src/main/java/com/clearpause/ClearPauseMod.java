@@ -63,12 +63,15 @@ public class ClearPauseMod {
                 event.setCanceled(true);
 
                 try {
-                    List<GuiButton> buttons = ReflectionHelper.getPrivateValue(GuiScreen.class, event.gui, BUTTON_LIST_FIELD);
+                    List<?> buttons = ReflectionHelper.getPrivateValue(GuiScreen.class, event.gui, BUTTON_LIST_FIELD);
                     
                     if (buttons != null) {
-                        for (GuiButton button : buttons) {
-                            if (button.visible) {
-                                button.drawButton(event.gui.mc, event.mouseX, event.mouseY);
+                        for (Object obj : buttons) {
+                            if (obj instanceof GuiButton) {
+                                GuiButton button = (GuiButton) obj;
+                                if (button.visible) {
+                                    button.drawButton(event.gui.mc, event.mouseX, event.mouseY);
+                                }
                             }
                         }
                     }
