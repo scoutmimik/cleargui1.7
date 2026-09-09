@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiScreenOptionsSounds;
+import net.minecraft.client.gui.GuiVideoSettings;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -38,22 +39,25 @@ public class ClearPauseMod {
             
             String className = event.gui.getClass().getName();
 
-            // Ak ide o akékoľvek OptiFine nastavenia, vôbec do toho nezasahujeme
-            if (className.contains("OptiFine") || className.contains("Detail") || className.contains("Quality") || className.contains("Performance") || className.contains("Animation") || className.contains("Other")) {
-                return;
-            }
-
-            // Kontrola štandardných menu
+            // Kontrola hlavnych menu
             boolean isStandardMenu = (event.gui instanceof GuiIngameMenu) 
                                   || (event.gui instanceof GuiOptions) 
+                                  || (event.gui instanceof GuiVideoSettings)
                                   || (event.gui instanceof GuiScreenOptionsSounds);
 
+            // Cielime len na konfiguračné obrazovky chatu, nie na samotný chat
             boolean isChatSettings = className.contains("ChatSettings") || className.contains("ChatOptions");
 
+            // Kontrola pod-menu
             boolean isSubMenu = isChatSettings
                                || className.contains("Customiz")
                                || className.contains("GuiOption") 
-                               || className.contains("ScreenOptions");
+                               || className.contains("ScreenOptions")
+                               || className.contains("GuiDetailSettings")
+                               || className.contains("GuiQualitySettings")
+                               || className.contains("GuiPerformanceSettings")
+                               || className.contains("GuiOtherSettings")
+                               || className.contains("GuiAnimation");
 
             if (isStandardMenu || isSubMenu) {
                 event.setCanceled(true);
