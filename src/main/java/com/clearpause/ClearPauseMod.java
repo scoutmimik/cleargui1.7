@@ -1,11 +1,46 @@
-@SubscribeEvent
+package com.clearpause;
+
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiIngameMenu;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiScreenOptionsSounds;
+import net.minecraft.client.gui.GuiVideoSettings;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.util.List;
+
+@Mod(
+    modid = ClearPauseMod.MODID, 
+    name = ClearPauseMod.NAME, 
+    version = ClearPauseMod.VERSION, 
+    acceptableRemoteVersions = "*"
+)
+public class ClearPauseMod {
+    public static final String MODID = "clearpause";
+    public static final String NAME = "Clear Pause Menu";
+    public static final String VERSION = "1.0";
+
+    private static final String[] BUTTON_LIST_FIELD = new String[]{"buttonList", "field_146292_n"};
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
     public void onDrawScreen(GuiScreenEvent.DrawScreenEvent.Pre event) {
         if (event.gui != null && event.gui.mc != null && event.gui.mc.theWorld != null) {
             
             String className = event.gui.getClass().getName();
 
-            // Zistíme, či ide o GuiContainer (inventáre, truhlice, pece, atď.)
-            boolean isContainer = event.gui instanceof net.minecraft.client.gui.inventory.GuiContainer;
+            boolean isContainer = event.gui instanceof GuiContainer;
 
             boolean isStandardMenu = (event.gui instanceof GuiIngameMenu) 
                                   || (event.gui instanceof GuiOptions) 
@@ -24,7 +59,6 @@
                                || className.contains("GuiOtherSettings")
                                || className.contains("GuiAnimation");
 
-            // Pridáme isContainer do hlavnej podmienky, aby sa zrušilo stmavenie za inventárom/truhlicou
             if (isStandardMenu || isSubMenu || isContainer) {
                 event.setCanceled(true);
 
@@ -47,3 +81,4 @@
             }
         }
     }
+}
