@@ -1,17 +1,12 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        maven { url = "https://maven.minecraftforge.net" }
+        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url = "https://jitpack.io" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'com.github.GTNewHorizons:ForgeGradle:FG_1.2:1.2.11'
     }
 }
 
@@ -31,20 +26,6 @@ minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "eclipse"
     mappings = "stable_12"
-}
-
-tasks.whenTaskAdded { task ->
-    if (task.name == 'downloadClient') {
-        task.actions.clear()
-        task.doLast {
-            def mcDir = new File(System.getProperty("user.home"), ".gradle/caches/minecraft/net/minecraft/minecraft/1.7.10")
-            mcDir.mkdirs()
-            def targetJar = new File(mcDir, "1.7.10.jar")
-            if (!targetJar.exists()) {
-                ant.copy(file: file("libs/1.7.10.jar"), tofile: targetJar)
-            }
-        }
-    }
 }
 
 dependencies {
