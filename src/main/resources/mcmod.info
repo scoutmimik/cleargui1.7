@@ -2,9 +2,9 @@
 {
   "modid": "clearpause",
   "name": "ClearPause",
-  "description": "uzivaj",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "description": "clears your menu like in lunar bro enjoy xddddddd",
+  "version": "1.0.0",
+  "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
   "authorList": ["scoutmimik"],
