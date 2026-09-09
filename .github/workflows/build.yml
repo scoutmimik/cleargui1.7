@@ -16,8 +16,11 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
 
-      - name: Setup Gradle Wrapper
-        run: gradle wrapper --gradle-version 2.7
+      - name: Setup Gradle Wrapper Manually
+        run: |
+          curl -sLO https://services.gradle.org/distributions/gradle-2.7-bin.zip
+          unzip -q gradle-2.7-bin.zip
+          ./gradle-2.7/bin/gradle wrapper --gradle-version 2.7
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew || true
