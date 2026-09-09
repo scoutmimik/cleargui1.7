@@ -14,6 +14,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 @Mod(
@@ -40,13 +41,7 @@ public class ClearPauseMod {
             
             String className = event.gui.getClass().getName();
 
-            // Ak ide o inventár alebo truhlicu (GuiContainer), nechceme zrušiť celé GUI,
-            // iba zamedziť tomu, aby sa stmamil svet na pozadí.
-            if (event.gui instanceof GuiContainer) {
-                // Vypneme štandardné stmavenie/pozadie za inventárom, ak ho obrazovka volá,
-                // alebo ho necháme vykresliť priehľadne. 
-                return; 
-            }
+            boolean isContainer = event.gui instanceof GuiContainer;
 
             boolean isStandardMenu = (event.gui instanceof GuiIngameMenu) 
                                   || (event.gui instanceof GuiOptions) 
@@ -81,6 +76,30 @@ public class ClearPauseMod {
                             }
                         }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (isContainer) {
+         
+                event.setCanceled(true);
+                
+                try {
+               
+                    GuiContainer container = (GuiContainer) event.gui;
+                    
+                    // Nakreslíme pozadie gui kontajnera (textúru truhlice/inventára)
+                    Method bgLayer = ReflectionHelper.findMethod(GuiContainer.class, container, new String[]{"drawGuiContainerBackgroundLayer", "func_146976_a"}, float.class, int.class, int.class);
+                    bgLayer.setAccessible(true);
+                    bgLayer.invoke(container, event.renderPartialTicks, event.mouseX, event.mouseY);
+
+                    // Nakreslíme predmety a sloty
+                    Method screenSuper = ReflectionHelper.findMethod(GuiScreen.class, container, new String[]{"drawScreen", "func_73863_a"}, int.class, int.class, float.class);
+                    // Aby sme neuviazli v nekonečnej slučke, zavoláme priamo predkovia nad GuiContainer (čiže GuiScreen drawScreen, ale bez pozadia)
+                    // Bezpečnejšie je vykresliť foreground vrstvu a sloty natvrdo:
+                    Method fgLayer = ReflectionHelper.findMethod(GuiContainer.class, container, new String[]{"drawGuiContainerForegroundLayer", "func_146979_h"}, int.class, int.class);
+                    fgLayer.setAccessible(true);
+                    fgLayer.invoke(container, event.mouseX, event.mouseY);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
