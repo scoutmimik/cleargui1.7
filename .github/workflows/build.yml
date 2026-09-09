@@ -16,6 +16,12 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
 
+      - name: Download Forge 1.7.10 JAR
+        run: |
+          mkdir -p libs
+          curl -sSL "https://raw.githubusercontent.com/GTNewHorizons/ExampleMod/master/libs/forge-1.7.10-10.13.4.1614-1.7.10-dev.jar" -o libs/forge-dev.jar
+          file libs/forge-dev.jar
+
       - name: Build with Maven
         run: mvn clean package
 
