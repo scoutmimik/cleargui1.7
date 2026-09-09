@@ -20,10 +20,6 @@
             <id>minecraft-libraries</id>
             <url>https://libraries.minecraft.net/</url>
         </repository>
-        <repository>
-            <id>gtnh-maven</id>
-            <url>https://nexus.gtnewhorizons.com/repository/releases/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -34,10 +30,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.gtnewhorizons</groupId>
+            <groupId>net.minecraftforge</groupId>
             <artifactId>forge</artifactId>
-            <version>1.7.10-10.13.4.1614-1.7.10-dev</version>
-            <scope>provided</scope>
+            <version>1.7.10-1614</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/forge-dev.jar</systemPath>
         </dependency>
     </dependencies>
 
