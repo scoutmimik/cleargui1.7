@@ -1,0 +1,16 @@
+[
+{
+  "modid": "clearpause",
+  "name": "ClearPause",
+  "description": "uzivaj",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["scoutmimik"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
