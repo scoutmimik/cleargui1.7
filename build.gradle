@@ -5,7 +5,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.jponge:gradle-jarjar:0.3'
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
@@ -36,7 +35,6 @@ processResources {
         include 'mcmod.info'
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-    
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
