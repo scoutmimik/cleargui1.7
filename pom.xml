@@ -21,8 +21,8 @@
             <url>https://libraries.minecraft.net/</url>
         </repository>
         <repository>
-            <id>cleanroom-maven</id>
-            <url>https://maven.cleanroommc.com/</url>
+            <id>gtnh-maven</id>
+            <url>https://nexus.gtnewhorizons.com/repository/releases/</url>
         </repository>
     </repositories>
 
@@ -34,9 +34,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.cleanroommc</groupId>
+            <groupId>com.gtnewhorizons</groupId>
             <artifactId>forge</artifactId>
-            <version>1.7.10-1614-MCP</version>
+            <version>1.7.10-10.13.4.1614-1.7.10-dev</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
