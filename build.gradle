@@ -15,8 +15,7 @@ buildscript {
     }
 }
 
-apply plugin: 'forge'
-
+// 1. Najprv nastavenia projektu a Minecraftu
 version = "1.0.0"
 group = "com.clearpause"
 archivesBaseName = "ClearPause-1.7.10"
@@ -29,6 +28,9 @@ minecraft {
     runDir = "eclipse"
     mappings = "stable_12"
 }
+
+// 2. Až potom aplikovať forge plugin
+apply plugin: 'forge'
 
 repositories {
     mavenCentral()
