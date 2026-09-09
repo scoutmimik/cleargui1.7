@@ -1,38 +1,56 @@
-name: ClearPause
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "https://maven.minecraftforge.net"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
 
-on:
-  push:
-    branches: [ "main", "master" ]
+apply plugin: 'forge'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    options.encoding = 'UTF-8'
+}
 
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
-        with:
-          java-version: '8'
-          distribution: 'temurin'
+version = "2.0"
+group = "net.kohi"
+archivesBaseName = "kokot"
 
-      - name: Setup Gradle Wrapper
-        run: gradle wrapper --gradle-version 2.7
+minecraft {
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "eclipse"
+    mappings = "stable_12"
+}
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew || true
+tasks.whenTaskAdded { task ->
+    if (task.name == 'downloadClient') {
+        task.doFirst {
+            def mcDir = new File(System.getProperty("user.home"), ".gradle/caches/minecraft/net/minecraft/minecraft/1.7.10")
+            mcDir.mkdirs()
+            def targetJar = new File(mcDir, "1.7.10.jar")
+            if (!targetJar.exists()) {
+                ant.copy(file: file("libs/1.7.10.jar"), tofile: targetJar)
+            }
+        }
+    }
+}
 
-      - name: Inject local Minecraft client JAR
-        run: |
-          mkdir -p ~/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10/
-          cp libs/1.7.10.jar ~/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10/1.7.10.jar
+dependencies {
+}
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ClearPause-JAR
-          path: 'build/libs/*.jar'
-          if-no-files-found: error
+jar {
+    manifest {
+        attributes("TweakClass": "net.kohi.tcpnodelaymod.TcpNoDelayTweaker")
+    }
+}
