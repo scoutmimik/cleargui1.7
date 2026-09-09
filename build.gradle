@@ -15,17 +15,20 @@ buildscript {
     }
 }
 
-version = "1.0.0"
-group = "com.clearpause"
+ext.configFile = file "build.properties"
 
 apply plugin: 'forge'
+
+version = "1.0.0"
+group = "com.clearpause"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
 }
 
-archivesBaseName = "ClearPause-1.7.10"
+// Nastavenie mena jaru az po aplikovani forge pluginu
+project.archivesBaseName = "ClearPause-1.7.10"
 
 sourceCompatibility = targetCompatibility = "1.8"
 compileJava.options.encoding = 'UTF-8'
