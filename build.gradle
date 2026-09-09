@@ -13,7 +13,7 @@ version = "1.0.0"
 group = "com.clearpause"
 archivesBaseName = "ClearPause-1.7.10"
 
-sourceCompatibility = targetCompatibility = "1.8"
+sourceCompatibility = targetCompatibility = "1.7"
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
