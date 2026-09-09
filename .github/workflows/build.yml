@@ -19,8 +19,8 @@ jobs:
       - name: Download Forge 1.7.10 JAR
         run: |
           mkdir -p libs
-          curl -L "https://nexus.gtnewhorizons.com/repository/releases/com/gtnewhorizons/forge/1.7.10-10.13.4.1614-1.7.10-dev/forge-1.7.10-10.13.4.1614-1.7.10-dev.jar" -o libs/forge-dev.jar
-
+          curl -L "https://maven.cleanroommc.com/com/cleanroommc/forge/1.7.10-1614-MCP/forge-1.7.10-1614-MCP.jar" -o libs/forge-dev.jar
+      
       - name: Build with Maven
         run: mvn clean package
 
