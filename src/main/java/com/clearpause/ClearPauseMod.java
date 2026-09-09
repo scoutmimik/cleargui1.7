@@ -38,7 +38,12 @@ public class ClearPauseMod {
             
             String className = event.gui.getClass().getName();
 
-            // Úplne odstránená GuiVideoSettings, takže si zachová klasické pozadie a pôvodné vykresľovanie
+            // Ak ide o akékoľvek OptiFine nastavenia, vôbec do toho nezasahujeme
+            if (className.contains("OptiFine") || className.contains("Detail") || className.contains("Quality") || className.contains("Performance") || className.contains("Animation") || className.contains("Other")) {
+                return;
+            }
+
+            // Kontrola štandardných menu
             boolean isStandardMenu = (event.gui instanceof GuiIngameMenu) 
                                   || (event.gui instanceof GuiOptions) 
                                   || (event.gui instanceof GuiScreenOptionsSounds);
@@ -48,12 +53,7 @@ public class ClearPauseMod {
             boolean isSubMenu = isChatSettings
                                || className.contains("Customiz")
                                || className.contains("GuiOption") 
-                               || className.contains("ScreenOptions")
-                               || className.contains("GuiDetailSettings")
-                               || className.contains("GuiQualitySettings")
-                               || className.contains("GuiPerformanceSettings")
-                               || className.contains("GuiOtherSettings")
-                               || className.contains("GuiAnimation");
+                               || className.contains("ScreenOptions");
 
             if (isStandardMenu || isSubMenu) {
                 event.setCanceled(true);
