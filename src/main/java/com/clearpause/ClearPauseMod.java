@@ -40,7 +40,13 @@ public class ClearPauseMod {
             
             String className = event.gui.getClass().getName();
 
-            boolean isContainer = event.gui instanceof GuiContainer;
+            // Ak ide o inventár alebo truhlicu (GuiContainer), nechceme zrušiť celé GUI,
+            // iba zamedziť tomu, aby sa stmamil svet na pozadí.
+            if (event.gui instanceof GuiContainer) {
+                // Vypneme štandardné stmavenie/pozadie za inventárom, ak ho obrazovka volá,
+                // alebo ho necháme vykresliť priehľadne. 
+                return; 
+            }
 
             boolean isStandardMenu = (event.gui instanceof GuiIngameMenu) 
                                   || (event.gui instanceof GuiOptions) 
@@ -59,7 +65,7 @@ public class ClearPauseMod {
                                || className.contains("GuiOtherSettings")
                                || className.contains("GuiAnimation");
 
-            if (isStandardMenu || isSubMenu || isContainer) {
+            if (isStandardMenu || isSubMenu) {
                 event.setCanceled(true);
 
                 try {
