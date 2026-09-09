@@ -50,14 +50,14 @@ public class ClearPauseMod {
 
             // Kontrola pod-menu
             boolean isSubMenu = isChatSettings
-                             || className.contains("Customiz")
-                             || className.contains("GuiOption") 
-                             || className.contains("ScreenOptions")
-                             || className.contains("GuiDetailSettings")
-                             || className.contains("GuiQualitySettings")
-                             || className.contains("GuiPerformanceSettings")
-                             || className.contains("GuiOtherSettings")
-                             || className.contains("GuiAnimation");
+                               || className.contains("Customiz")
+                               || className.contains("GuiOption") 
+                               || className.contains("ScreenOptions")
+                               || className.contains("GuiDetailSettings")
+                               || className.contains("GuiQualitySettings")
+                               || className.contains("GuiPerformanceSettings")
+                               || className.contains("GuiOtherSettings")
+                               || className.contains("GuiAnimation");
 
             if (isStandardMenu || isSubMenu) {
                 event.setCanceled(true);
@@ -68,8 +68,7 @@ public class ClearPauseMod {
                     if (buttons != null) {
                         for (GuiButton button : buttons) {
                             if (button.visible) {
-                                // V 1.7.10 sa volá func_146112_a (prípadne drawButton v deobfuskávanom prostredí)
-                                button.func_146112_a(event.gui.mc, event.mouseX, event.mouseY);
+                                button.drawButton(event.gui.mc, event.mouseX, event.mouseY);
                             }
                         }
                     }
