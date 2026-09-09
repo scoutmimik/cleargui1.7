@@ -1,4 +1,4 @@
-name: Build Mod 1.7.10
+name: ClearPausePort
 
 on:
   push:
@@ -16,10 +16,10 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
 
-      - name: Setup Gradle 2.7
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: '2.7'
+          gradle-version: '8.5'
 
       - name: Build with Gradle
         run: gradle build
@@ -27,6 +27,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ClearPause
+          name: ClearPause-1.7.10-JAR
           path: 'build/libs/*.jar'
           if-no-files-found: error
