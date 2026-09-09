@@ -23,21 +23,20 @@ minecraft {
     runDir = "run"
     mappings = "stable_12"
 }
-afterEvaluate {
-    if (project.hasProperty("minecraft")) {
-        tasks.named("downloadClient").configure {
-            doFirst {
-                def mcDir = new File(System.getProperty("user.home"), ".gradle/caches/minecraft/net/minecraft/minecraft/1.7.10")
-                mcDir.mkdirs()
-                def targetJar = new File(mcDir, "1.7.10.jar")
-                if (!targetJar.exists()) {
-                    // Skopíruje náš lokálny libs/1.7.10.jar priamo tam, kam to ForgeGradle čaká
-                    ant.copy(file: file("libs/1.7.10.jar"), tofile: targetJar)
-                }
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'downloadClient') {
+        task.doFirst {
+            def mcDir = new File(System.getProperty("user.home"), ".gradle/caches/minecraft/net/minecraft/minecraft/1.7.10")
+            mcDir.mkdirs()
+            def targetJar = new File(mcDir, "1.7.10.jar")
+            if (!targetJar.exists()) {
+                ant.copy(file: file("libs/1.7.10.jar"), tofile: targetJar)
             }
         }
     }
 }
+
 dependencies {
 }
 
