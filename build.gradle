@@ -1,21 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "Gradle Plugin Portal"
-            url = "https://plugins.gradle.org/m2/"
-        }
-        maven {
-            name = "CleanroomMC"
-            url = "https://maven.cleanroommc.com/"
-        }
-    }
-    dependencies {
-        classpath "com.gtnewhorizons:retrofuturagradle:1.3.38"
-    }
+plugins {
+    id 'com.gtnewhorizons.retrofuturagradle' version '1.3.27'
 }
-
-apply plugin: 'com.gtnewhorizons.retrofuturagradle'
 
 version = "1.0.0"
 group = "com.clearpause"
@@ -33,6 +18,10 @@ minecraft {
 
 repositories {
     mavenCentral()
+    maven {
+        name = "CleanroomMC"
+        url = "https://maven.cleanroommc.com/"
+    }
 }
 
 dependencies {}
