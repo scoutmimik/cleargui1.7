@@ -30,9 +30,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.minecraftforge</groupId>
+            <groupId>com.cleanroommc</groupId>
             <artifactId>forge</artifactId>
-            <version>1.7.10-dev</version>
+            <version>1.7.10-1614-MCP</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/forge-dev.jar</systemPath>
         </dependency>
