@@ -35,8 +35,8 @@ minecraft {
 
 tasks.whenTaskAdded { task ->
     if (task.name == 'downloadClient') {
-        task.outputs.file(file("libs/1.7.10.jar"))
-        task.doFirst {
+        task.actions.clear()
+        task.doLast {
             def mcDir = new File(System.getProperty("user.home"), ".gradle/caches/minecraft/net/minecraft/minecraft/1.7.10")
             mcDir.mkdirs()
             def targetJar = new File(mcDir, "1.7.10.jar")
@@ -44,7 +44,6 @@ tasks.whenTaskAdded { task ->
                 ant.copy(file: file("libs/1.7.10.jar"), tofile: targetJar)
             }
         }
-        task.enabled = false
     }
 }
 
