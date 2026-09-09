@@ -1,17 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "GTNH Maven"
-            url = "https://nexus.gtnewhorizons.com/repository/public/"
-        }
-    }
-    dependencies {
-        classpath "com.gtnewhorizons:retrofuturagradle:1.3.31"
-    }
+plugins {
+    id 'com.gtnewhorizons.retrofuturagradle' version '1.3.27'
 }
-
-apply plugin: "net.minecraftforge.gradle.forge"
 
 version = "1.0.0"
 group = "com.clearpause"
