@@ -1,8 +1,8 @@
-name: ClearPauseMOD
+name: ClearPause
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
 
 jobs:
   build:
@@ -30,6 +30,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ClearPause-1.7.10-JAR
+          name: TcpNoDelayMod-JAR
           path: 'build/libs/*.jar'
           if-no-files-found: error
