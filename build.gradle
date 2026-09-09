@@ -30,7 +30,7 @@ compileJava {
 
 version = "2.0"
 group = "net.kohi"
-archivesBaseName = "kokot"
+archivesBaseName = "ClearPause"
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
@@ -42,7 +42,4 @@ dependencies {
 }
 
 jar {
-    manifest {
-        attributes("TweakClass": "net.kohi.tcpnodelaymod.TcpNoDelayTweaker")
-    }
 }
