@@ -25,10 +25,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew || true
 
-      - name: Inject local Minecraft client JAR
+      - name: Inject local Minecraft client JAR and metadata
         run: |
-          mkdir -p ~/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10/
-          cp libs/1.7.10.jar ~/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10/1.7.10.jar
+          MC_DIR="$HOME/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10"
+          mkdir -p "$MC_DIR"
+          cp libs/1.7.10.jar "$MC_DIR/1.7.10.jar"
+          echo '{"id":"1.7.10","time":"2014-06-25T11:00:00+02:00","releaseTime":"2014-06-25T11:00:00+02:00","type":"release"}' > "$MC_DIR/1.7.10.json"
 
       - name: Build with Gradle
         run: ./gradlew build
