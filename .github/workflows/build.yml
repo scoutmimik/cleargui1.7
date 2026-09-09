@@ -24,8 +24,8 @@ jobs:
           mkdir -p ~/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10/
           cp libs/1.7.10.jar ~/.gradle/caches/minecraft/net/minecraft/minecraft/1.7.10/1.7.10.jar
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build with Gradle (Offline Mode)
+        run: ./gradlew build --offline
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
