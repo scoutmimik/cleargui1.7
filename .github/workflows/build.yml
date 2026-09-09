@@ -16,12 +16,6 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
 
-      - name: Install Gradle 2.7 manually
-        run: |
-          wget https://services.gradle.org/distributions/gradle-2.7-bin.zip
-          unzip gradle-2.7-bin.zip
-          echo "$PWD/gradle-2.7/bin" >> $GITHUB_PATH
-
       - name: Setup Gradle Wrapper
         run: gradle wrapper --gradle-version 2.7
 
