@@ -1,32 +1,58 @@
-name: ClearPauseMOD
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-on:
-  push:
-    branches: [ "main" ]
+    <groupId>com.clearpause</groupId>
+    <artifactId>clearpause</artifactId>
+    <name>ClearPause</name>
+    <version>1.0.0</version>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
-        with:
-          java-version: '8'
-          distribution: 'temurin'
+    <repositories>
+        <repository>
+            <id>minecraft-libraries</id>
+            <url>https://libraries.minecraft.net/</url>
+        </repository>
+    </repositories>
 
-      - name: Download Forge 1.7.10 JAR
-        run: |
-          mkdir -p libs
-          curl -fSL "https://maven.cleanroommc.com/com/cleanroommc/forge/1.7.10-1614-MCP/forge-1.7.10-1614-MCP.jar" -o libs/forge-dev.jar
+    <dependencies>
+        <dependency>
+            <groupId>net.minecraft</groupId>
+            <artifactId>launchwrapper</artifactId>
+            <version>1.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.cleanroommc</groupId>
+            <artifactId>forge</artifactId>
+            <version>1.7.10-1614-MCP</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/forge-dev.jar</systemPath>
+        </dependency>
+    </dependencies>
 
-      - name: Build with Maven
-        run: mvn clean package
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ClearPause-1.7.10-JAR
-          path: 'target/*.jar'
-          if-no-files-found: error
+    <build>
+        <defaultGoal>clean package</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <FMLCorePluginContainsFMLMod>true</FMLCorePluginContainsFMLMod>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
