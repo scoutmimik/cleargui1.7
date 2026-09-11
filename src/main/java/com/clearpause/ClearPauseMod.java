@@ -29,7 +29,7 @@ import java.util.List;
 public class ClearPauseMod {
     public static final String MODID = "clearpause";
     public static final String NAME = "Clear Pause Menu";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.1";
 
     public static boolean enabled = true;
 
@@ -111,7 +111,7 @@ public class ClearPauseMod {
         public void processCommand(ICommandSender sender, String[] args) {
             enabled = !enabled;
             String status = enabled ? EnumChatFormatting.GREEN + "ON" : EnumChatFormatting.RED + "OFF";
-            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + "[ClearPause] Mod: " + status));
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + "ClearPause: " + status));
         }
     }
 }
